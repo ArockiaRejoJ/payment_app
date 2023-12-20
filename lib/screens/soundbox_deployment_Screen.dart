@@ -247,7 +247,7 @@ class _SoundboxDeploymentScreenState extends State<SoundboxDeploymentScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.r))),
                 onPressed: () {
-                  widget.callback(3);
+                  widget.callback(4);
                   Navigator.of(context).pop();
                 },
                 child: const Text('Deploy Another Device'),
