@@ -193,9 +193,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("1. "),
-                            SizedBox(height: 5.h),
+                            SizedBox(height: 10.h),
                             Text("2. "),
-                            SizedBox(height: 101.h)
+                            SizedBox(height: 118.5.h)
                           ],
                         ),
                         SizedBox(width: 5.w),

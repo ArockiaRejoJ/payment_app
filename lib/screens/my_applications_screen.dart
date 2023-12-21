@@ -138,7 +138,7 @@ class _MyApplicationScreenState extends State<MyApplicationScreen> {
             SizedBox(height: 15.h),
             Expanded(
                 child: ListView.builder(
-              itemCount: 5,
+              itemCount:listOfCustomers.length ,
               itemBuilder: (context, index) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

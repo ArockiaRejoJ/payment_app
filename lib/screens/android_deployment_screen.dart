@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AndroidDeploymentScreen extends StatefulWidget {
   final String? name;
@@ -17,6 +20,53 @@ class AndroidDeploymentScreen extends StatefulWidget {
 }
 
 class _AndroidDeploymentScreenState extends State<AndroidDeploymentScreen> {
+  bool _isloading = false;
+  bool _isloading2 = false;
+  File? _imageFile;
+  File? _imageFile2;
+
+  Future<dynamic> _pickImage(ImageSource source, BuildContext context) async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+        source: source,
+        preferredCameraDevice: CameraDevice.rear,
+        maxHeight: 200.h,
+        maxWidth: 200.w);
+    setState(() {
+      _isloading = true;
+    });
+
+    if (pickedImage != null) {
+      setState(() {
+        _imageFile = File(pickedImage.path);
+      });
+      setState(() {
+        _isloading = false;
+      });
+    }
+  }
+
+  Future<dynamic> _pickImage1(ImageSource source, BuildContext context) async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+        source: source,
+        preferredCameraDevice: CameraDevice.rear,
+        maxHeight: 200.h,
+        maxWidth: 200.w);
+    setState(() {
+      _isloading2 = true;
+    });
+
+    if (pickedImage != null) {
+      setState(() {
+        _imageFile2 = File(pickedImage.path);
+      });
+      setState(() {
+        _isloading2 = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,24 +187,30 @@ class _AndroidDeploymentScreenState extends State<AndroidDeploymentScreen> {
                     ],
                   ),
                   SizedBox(height: 10.h),
-                  Center(
-                    child: CircleAvatar(
-                      maxRadius: 25.r,
-                      minRadius: 25.r,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: CircleAvatar(
-                        maxRadius: 18.r,
-                        minRadius: 18.r,
-                        backgroundColor: Colors.white,
-                        child: Padding(
-                          padding: EdgeInsets.all(5.r),
-                          child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                              strokeWidth: 5),
-                        ),
-                      ),
-                    ),
-                  )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _imageFile != null
+                          ? _isloading
+                              ? const CircularProgressIndicator()
+                              : Padding(
+                                  padding: EdgeInsets.only(right: 10.w),
+                                  child: SizedBox(
+                                    height: 60.h,
+                                    width: 60.w,
+                                    child: Image.file(
+                                      _imageFile!,
+                                    ),
+                                  ),
+                                )
+                          : Container(),
+                      IconButton(
+                          onPressed: () {
+                            _pickImage(ImageSource.camera, context);
+                          },
+                          icon: const Icon(Icons.camera_alt_outlined)),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -198,24 +254,30 @@ class _AndroidDeploymentScreenState extends State<AndroidDeploymentScreen> {
                     ],
                   ),
                   SizedBox(height: 10.h),
-                  Center(
-                    child: CircleAvatar(
-                      maxRadius: 25.r,
-                      minRadius: 25.r,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: CircleAvatar(
-                        maxRadius: 18.r,
-                        minRadius: 18.r,
-                        backgroundColor: Colors.white,
-                        child: Padding(
-                          padding: EdgeInsets.all(5.r),
-                          child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                              strokeWidth: 5),
-                        ),
-                      ),
-                    ),
-                  )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _imageFile2 != null
+                          ? _isloading2
+                              ? const CircularProgressIndicator()
+                              : Padding(
+                                  padding: EdgeInsets.only(right: 10.w),
+                                  child: SizedBox(
+                                    height: 60.h,
+                                    width: 60.w,
+                                    child: Image.file(
+                                      _imageFile2!,
+                                    ),
+                                  ),
+                                )
+                          : Container(),
+                      IconButton(
+                          onPressed: () {
+                            _pickImage1(ImageSource.camera, context);
+                          },
+                          icon: const Icon(Icons.camera_alt_outlined)),
+                    ],
+                  ),
                 ],
               ),
             ),
