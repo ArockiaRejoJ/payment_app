@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:payment_app/status_container_widget.dart';
 
 class SoundboxDeploymentScreen extends StatefulWidget {
   final String? name;
@@ -32,9 +31,11 @@ class _SoundboxDeploymentScreenState extends State<SoundboxDeploymentScreen> {
             size: 20.sp,
           ),
           SizedBox(width: 5.w),
-          IconButton(onPressed: () {
-            Navigator.of(context).pop();
-          }, icon: Icon(Icons.close, size: 20.sp)),
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(Icons.close, size: 20.sp)),
           SizedBox(width: 5.w),
         ],
       ),

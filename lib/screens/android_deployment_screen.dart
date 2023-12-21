@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:payment_app/status_container_widget.dart';
 
 class AndroidDeploymentScreen extends StatefulWidget {
   final String? name;
